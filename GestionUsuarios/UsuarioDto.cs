@@ -13,7 +13,7 @@ namespace GestionUsuarios
         {
             DBConnection conn = new DBConnection();
             List<UsuarioDto> usuarios = new List<UsuarioDto>();
-            string query = "SELECT * FROM usuarios";
+            string query = "SELECT u.usr_id,usr_nombre,usr_apellido,usr_email,p.pais FROM usuarios u INNER JOIN paises p ON u.id_pais = p.id";
             using (SqlConnection connection = conn.ObtenerConexion())
             {
                 SqlCommand command = new SqlCommand(query, connection);
@@ -44,7 +44,7 @@ namespace GestionUsuarios
         {
 
             DBConnection conn = new DBConnection();
-            string query = "SELECT * FROM usuarios WHERE usr_id=@id";
+            string query = "SELECT u.usr_id,usr_nombre,usr_apellido,usr_email,p.pais FROM usuarios u INNER JOIN paises p ON u.id_pais = p.id WHERE usr_id=@id";
             using (SqlConnection connection = conn.ObtenerConexion())
 
             {
@@ -79,7 +79,7 @@ namespace GestionUsuarios
 
             DBConnection conn = new DBConnection();
             string query = "INSERT INTO usuarios(" +
-            "usr_nombre, usr_apellido, usr_email, usr_pais) " +
+            "usr_nombre, usr_apellido, usr_email, id_pais) " +
             "VALUES (@nombre, @apellido, @email, @pais)";
 
             using (SqlConnection connection = conn.ObtenerConexion())
@@ -113,9 +113,7 @@ namespace GestionUsuarios
 
             DBConnection conn = new DBConnection();
             string query = "UPDATE usuarios SET usr nombre=@nombre, usr_apellido=@apellido," +
-            "usr_email=@email, usr_pais=@pais " +
-
-                                      "WHERE usr_id=@id";
+            "usr_email=@email, id_pais=@pais WHERE usr_id=@id";
 
             using (SqlConnection connection = conn.ObtenerConexion())
             {

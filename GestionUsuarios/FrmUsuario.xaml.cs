@@ -34,7 +34,7 @@ namespace GestionUsuarios
             List<paises> lista = paises.obtener();
             cbPais.ItemsSource = lista;
             cbPais.DisplayMemberPath = "pais";
-            cbPais.SelectedValuePath = "pais";
+            cbPais.SelectedValuePath = "id";
             if (id != null) CargarDatos();
         }
 
